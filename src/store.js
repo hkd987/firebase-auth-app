@@ -9,15 +9,20 @@ export default new Vuex.Store({
     user: null,
     isLoading: false,
     errorMsg: '',
-    showError: false
+    showError: false,
+    stream: null
   },
   getters: {
     user: state => state.user,
     isLoading: state => state.isLoading,
     errorMsg: state => state.errorMsg,
-    showError: state => state.showError
+    showError: state => state.showError,
+    stream: state => state.stream
   },
   mutations: {
+    getStream (state, payload) {
+      state.stream = payload
+    },
     setUser (state, payload) {
       state.user = payload
     },
@@ -31,16 +36,25 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    getStream ({ commit }) {
+      commit('isLoading')
+      const STREAM = firebase.database().ref(`all_statues`)
+      STREAM.on('value', (snapshot) => {
+        const data = snapshot.val()
+        commit('getStream', data)
+      })
+      commit('isLoading')
+    },
     statusUpdate ({ commit }, payload) {
       commit('isLoading')
       const PATH = firebase.database().ref(`all_statues`)
       PATH.push({
-          status_user: {
-            user_id: this.getters.user.id,
-            user_email: this.getters.user.email
-          },
-          status_text: payload.status,
-          status_time: payload.time
+        status_user: {
+          user_id: this.getters.user.id,
+          user_email: this.getters.user.email
+        },
+        status_text: payload.status,
+        status_time: payload.time
       })
       commit('isLoading')
     },
