@@ -32,6 +32,8 @@ export default {
         password: this.password
       }
       this.$store.dispatch('signUserUp', payload)
+      this.email = ''
+      this.password = ''
     }
   }
 }
