@@ -10,7 +10,7 @@
         </b-input>
       </b-field>
 
-      <button class="button is-primary" @click.prevent="signUpWithEmailAndPassword">Login</button>
+      <button class="button is-primary" @click="signUpWithEmailAndPassword">Login</button>
     </div>
   </div>
 </template>
@@ -44,7 +44,11 @@ export default {
       return this.$store.getters.user
     }
   },
-  created () {}
+  created () {
+    if (this.user !== null) {
+      this.$router.push({ path: '/main' })
+    }
+  }
 }
 </script>
 

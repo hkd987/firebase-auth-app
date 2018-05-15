@@ -31,6 +31,12 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    statusUpdate ({ commit }, payload) {
+      commit('isLoading')
+      const PATH = firebase.database().ref(`status/${this.getters.user.id}`)
+      PATH.push(payload)
+      commit('isLoading')
+    },
     signInUser ({ commit }, { email, password }) {
       commit('isLoading')
       firebase.auth().signInWithEmailAndPassword(email, password)

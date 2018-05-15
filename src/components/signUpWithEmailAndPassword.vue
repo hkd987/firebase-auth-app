@@ -44,7 +44,11 @@ export default {
       return this.$store.getters.user
     }
   },
-  created () {}
+  created () {
+    if (this.user !== null) {
+      this.$router.push({ path: '/main' })
+    }
+  }
 }
 </script>
 
