@@ -1,9 +1,11 @@
 <template>
   <div id="app" class="container">
 
+      <navBar/>
+
       <div class="container">
         <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :canCancel="false"></b-loading>
-        <div class="section">
+        <div class="section" v-if="showError">
           <b-notification type="is-danger" :active.sync="showError" v-if="showError" has-icon>
             <p>{{ this.errorMsg }}</p>
           </b-notification>
@@ -16,9 +18,12 @@
 </template>
 
 <script>
+import navBar from '@/components/navBar.vue'
 export default {
   name: 'App',
-  components: {},
+  components: {
+    navBar
+  },
   data () {
     return {
       isFullPage: true

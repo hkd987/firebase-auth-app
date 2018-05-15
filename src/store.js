@@ -11,7 +11,7 @@ export default new Vuex.Store({
     errorMsg: '',
     showError: false
   },
-  getter: {
+  getters: {
     user: state => state.user,
     isLoading: state => state.isLoading,
     errorMsg: state => state.errorMsg,
@@ -25,12 +25,29 @@ export default new Vuex.Store({
       state.isLoading = !state.isLoading
     },
     error (state, payload) {
-      if (payload.error === true) state.errorMsg = payload.msg
-      if (payload === false) state.errorMsg = ''
+      if (payload) state.errorMsg = payload.message
+      if (!payload) state.errorMsg = ''
       state.showError = !state.showError
     }
   },
   actions: {
+    signInUser ({ commit }, { email, password }) {
+      commit('isLoading')
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(user => {
+          commit('isLoading')
+          commit('setUser', {
+            id: user.uid,
+            name: user.displayName,
+            email: user.email,
+            photoUrl: user.photoURL
+          })
+        })
+        .catch(err => {
+          commit('isLoading')
+          commit('error', err)
+        })
+    },
     signUserUp ({ commit }, { email, password }) {
       commit('isLoading')
       firebase.auth().createUserWithEmailAndPassword(email, password)

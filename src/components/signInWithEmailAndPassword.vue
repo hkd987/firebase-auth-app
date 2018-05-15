@@ -10,7 +10,7 @@
         </b-input>
       </b-field>
 
-      <button class="button is-primary" @click.prevent="signUpWithEmailAndPassword">Sign Up</button>
+      <button class="button is-primary" @click.prevent="signUpWithEmailAndPassword">Login</button>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
         email: this.email,
         password: this.password
       }
-      this.$store.dispatch('signUserUp', payload)
+      this.$store.dispatch('signInUser', payload)
       this.email = ''
       this.password = ''
       if (this.user !== null) {
