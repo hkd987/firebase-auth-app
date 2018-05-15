@@ -33,8 +33,15 @@ export default new Vuex.Store({
   actions: {
     statusUpdate ({ commit }, payload) {
       commit('isLoading')
-      const PATH = firebase.database().ref(`status/${this.getters.user.id}`)
-      PATH.push(payload)
+      const PATH = firebase.database().ref(`all_statues`)
+      PATH.push({
+          status_user: {
+            user_id: this.getters.user.id,
+            user_email: this.getters.user.email
+          },
+          status_text: payload.status,
+          status_time: payload.time
+      })
       commit('isLoading')
     },
     signInUser ({ commit }, { email, password }) {
