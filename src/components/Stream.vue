@@ -16,7 +16,7 @@ export default {
   methods: {
     getStream () {
       this.$store.dispatch('getStream')
-    },
+    }
   },
   created () {
     this.getStream()
