@@ -1,6 +1,13 @@
 <template>
-  <div>
-    <p v-for="status in sortedStream">{{ status.status_text }}</p>
+  <div class="container">
+    <div class="box" v-for="status in sortedStream">
+    <section class="section">
+      <b-message type="is-primary">
+        {{ status.status_text }}
+      </b-message>
+    </section>
+  </div>
+    <!--<p v-for="status in sortedStream">{{ status.status_text }}</p>-->
   </div>
 </template>
 
