@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-for="status in stream">{{ status.status_text }}</p>
+    <p v-for="status in sortedStream">{{ status.status_text }}</p>
   </div>
 </template>
 
@@ -27,6 +27,17 @@ export default {
     },
     stream () {
       return this.$store.getters.stream
+    },
+    sortedStream () {
+      const temp = []
+      const stream = this.stream
+      for (const item in stream) {
+        temp.push(stream[item])
+      }
+      temp.sort((a, b) => {
+        return a.status_time_stamp > b.status_time_stamp
+      })
+      return temp
     }
   }
 }

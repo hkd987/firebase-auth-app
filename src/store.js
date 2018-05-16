@@ -38,10 +38,9 @@ export default new Vuex.Store({
   actions: {
     getStream ({ commit }) {
       commit('isLoading')
-      // const d = new Date()
-      const STREAM = firebase.database().ref(`all_statues`)
-      STREAM.orderByChild('status_time_stamp').on('value', (snapshot) => {
-        console.log(snapshot)
+      const d = toString(new Date().getTime())
+      const STREAM = firebase.database().ref(`all_statues/`)
+      STREAM.orderByKey().on('value', (snapshot) => {
         const data = snapshot.val()
         commit('getStream', data)
       })
