@@ -19,7 +19,6 @@ export default {
     sendUpdate () {
       const BLAH = new Date()
       const BLAH_STRING = BLAH.toLocaleString()
-      console.log(BLAH_STRING)
       const payload = {
         status: this.status,
         time: BLAH_STRING

@@ -38,8 +38,10 @@ export default new Vuex.Store({
   actions: {
     getStream ({ commit }) {
       commit('isLoading')
+      // const d = new Date()
       const STREAM = firebase.database().ref(`all_statues`)
-      STREAM.on('value', (snapshot) => {
+      STREAM.orderByChild('status_time_stamp').on('value', (snapshot) => {
+        console.log(snapshot)
         const data = snapshot.val()
         commit('getStream', data)
       })
@@ -48,13 +50,19 @@ export default new Vuex.Store({
     statusUpdate ({ commit }, payload) {
       commit('isLoading')
       const PATH = firebase.database().ref(`all_statues`)
-      PATH.push({
+      const PATH_KEY = PATH.push({
         status_user: {
           user_id: this.getters.user.id,
           user_email: this.getters.user.email
         },
         status_text: payload.status,
-        status_time: payload.time
+        status_time_string: payload.time,
+        status_time_stamp: firebase.database.ServerValue.TIMESTAMP
+      }).getKey()
+      const UPDATE_TIME = PATH.child(`${PATH_KEY}/status_time_stamp`)
+      UPDATE_TIME.once('value', (snapshot) => {
+        const newStamp = parseInt(snapshot.val() * -1)
+        UPDATE_TIME.set(newStamp)
       })
       commit('isLoading')
     },
