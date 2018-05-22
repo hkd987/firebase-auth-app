@@ -9,6 +9,7 @@
           <p class="is-size-3">{{ status.items.status_text }}</p>
         </b-message>
         <StreamShowComments :statusKey="status.key"/>
+        <br/>
         <StreamComment :statusKey="status.key" />
       </section>
     </div>

@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <p v-if="statusKey === comments.status_key">{{ comments }}</p>
+    <div class="box" v-for="item in comments" v-if="statusKey === item.status_key">
+      <p class="is-small">{{ item.comment_comment }}</p>
+    </div>
   </div>
 </template>
 
@@ -26,12 +28,12 @@ export default {
     this.getComments()
   },
   computed: {
-      user () {
-        return this.$store.getters.user
-      },
-      comments () {
-        return this.$store.getters.comments
-      }
+    user () {
+      return this.$store.getters.user
+    },
+    comments () {
+      return this.$store.getters.comments
+    }
   }
 }
 </script>
