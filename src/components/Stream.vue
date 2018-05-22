@@ -8,15 +8,19 @@
           </div>
           <p class="is-size-3">{{ status.status_text }}</p>
         </b-message>
-        <button class="button is-pulled-right is-primary">Comment</button>
+        <StreamComment/>
       </section>
     </div>
   </div>
 </template>
 
 <script>
+import StreamComment from '@/components/StreamComment.vue'
 export default {
   name: 'Stream',
+  components: {
+    StreamComment
+  },
   props: {},
   data () {
     return {
