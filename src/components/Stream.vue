@@ -8,6 +8,7 @@
           </div>
           <p class="is-size-3">{{ status.items.status_text }}</p>
         </b-message>
+        <StreamShowComments :statusKey="status.key"/>
         <StreamComment :statusKey="status.key" />
       </section>
     </div>
@@ -16,10 +17,12 @@
 
 <script>
 import StreamComment from '@/components/StreamComment.vue'
+import StreamShowComments from '@/components/StreamShowComments.vue'
 export default {
   name: 'Stream',
   components: {
-    StreamComment
+    StreamComment,
+    StreamShowComments
   },
   props: {},
   data () {

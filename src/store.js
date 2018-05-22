@@ -10,18 +10,23 @@ export default new Vuex.Store({
     isLoading: false,
     errorMsg: '',
     showError: false,
-    stream: null
+    stream: null,
+    comments: null
   },
   getters: {
     user: state => state.user,
     isLoading: state => state.isLoading,
     errorMsg: state => state.errorMsg,
     showError: state => state.showError,
-    stream: state => state.stream
+    stream: state => state.stream,
+    comments: state => state.comments
   },
   mutations: {
     getStream (state, payload) {
       state.stream = payload
+    },
+    getComments (state, payload) {
+      state.comments = payload
     },
     setUser (state, payload) {
       state.user = payload
@@ -36,6 +41,15 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    getComments ({ commit }) {
+      commit('isLoading')
+      const COMMENTS = firebase.database().ref(`all_comments/`)
+      COMMENTS.orderByKey().on('value', (snapshot) => {
+        const data = snapshot.val()
+        commit('getComments', data)
+      })
+      commit('isLoading')
+    },
     addComment ({ commit }, payload) {
       commit('isLoading')
       const PATH = firebase.database().ref(`all_comments`)

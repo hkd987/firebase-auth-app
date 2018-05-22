@@ -15,7 +15,7 @@ export default {
   name: 'StreamComment',
   props: {
     statusKey: {
-      String
+      type: String
     }
   },
   data () {
