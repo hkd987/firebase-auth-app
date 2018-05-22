@@ -1,13 +1,16 @@
 <template>
   <div class="container">
     <div class="box" v-for="status in sortedStream">
-    <section class="section">
-      <b-message type="is-primary">
-        {{ status.status_text }}
-      </b-message>
-    </section>
-  </div>
-    <!--<p v-for="status in sortedStream">{{ status.status_text }}</p>-->
+      <section class="section">
+        <b-message type="is-primary">
+          <div class="box">
+            <p class="is-size-6">{{ status.status_user.user_email }} on {{ status.status_time_string }}</p>
+          </div>
+          <p class="is-size-3">{{ status.status_text }}</p>
+        </b-message>
+        <button class="button is-pulled-right is-primary">Comment</button>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -42,7 +45,9 @@ export default {
         temp.push(stream[item])
       }
       temp.sort((a, b) => {
-        return a.status_time_stamp > b.status_time_stamp
+        if (a.status_time_stamp >= b.status_time_stamp) {
+          return true
+        }
       })
       return temp
     }
