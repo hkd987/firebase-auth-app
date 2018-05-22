@@ -19,7 +19,7 @@
 export default {
   name: 'Blank',
   props: {},
-  date () {
+  data () {
     return {
       email: '',
       password: ''
