@@ -14,7 +14,9 @@
 export default {
   name: 'StreamComment',
   props: {
-
+    statusKey: {
+      String
+    }
   },
   data () {
     return {
@@ -27,7 +29,15 @@ export default {
       this.commentClicked = !this.commentClicked
     },
     sendComment () {
-      console.log(this.comment)
+      const BLAH = new Date()
+      const BLAH_STRING = BLAH.toLocaleString()
+      const payload = {
+        comment_comment: this.comment,
+        comment_time: BLAH_STRING,
+        comment_status_key: this.statusKey
+      }
+      this.$parent.$emit('addComment', payload)
+      this.comment = ''
       this.flipClicked()
     }
   }

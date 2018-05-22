@@ -36,6 +36,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    addComment ({ commit }, payload) {
+      console.log(payload)
+    },
     getStream ({ commit }) {
       commit('isLoading')
       const STREAM = firebase.database().ref(`all_statues/`)
