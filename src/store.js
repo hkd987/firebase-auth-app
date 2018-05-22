@@ -37,7 +37,24 @@ export default new Vuex.Store({
   },
   actions: {
     addComment ({ commit }, payload) {
-      console.log(payload)
+      commit('isLoading')
+      const PATH = firebase.database().ref(`all_comments`)
+      const PATH_KEY = PATH.push({
+        status_key: payload.comment_status_key,
+        comment_comment: payload.comment_comment,
+        comment_time_string: payload.comment_time,
+        comment_user: {
+          comment_user_email: payload.comment_user.comment_user_email,
+          comment_user_id: payload.comment_user.comment_user_id
+        },
+        comment_time_stamp: firebase.database.ServerValue.TIMESTAMP
+      }).getKey()
+      const UPDATE_TIME = PATH.child(`${PATH_KEY}/comment_time_stamp`)
+      UPDATE_TIME.once('value', (snapshot) => {
+        const newStamp = parseInt(snapshot.val() * -1)
+        UPDATE_TIME.set(newStamp)
+      })
+      commit('isLoading')
     },
     getStream ({ commit }) {
       commit('isLoading')
