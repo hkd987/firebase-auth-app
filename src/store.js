@@ -130,7 +130,6 @@ export default new Vuex.Store({
         .catch(err => {
           commit('isLoading')
           commit('error', err)
-          console.log(err)
         })
     },
     autoSignIn ({ commit }, { uid, displayName, email, photoURL }) {
