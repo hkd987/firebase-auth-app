@@ -5,7 +5,7 @@ import store from './store'
 import * as firebase from 'firebase'
 import Buefy from 'buefy'
 import 'buefy/lib/buefy.css'
-import keys from './config/keys.js'
+import keys from '@/config/keys.js'
 Vue.use(Buefy)
 Vue.config.productionTip = false
 
