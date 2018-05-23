@@ -1,0 +1,16 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "all_statues": {
+      ".indexOn": [
+        "status_time_stamp"
+      ]
+    },
+    "all_comments": {
+      ".indexOn": [
+        "comment_time_stamp"
+      ]
+    }
+  }
+}
