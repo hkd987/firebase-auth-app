@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="box" v-for="item in comments" v-if="statusKey === item.status_key">
+    <div class="box" v-for="(item, key, index) in comments" :key="index" v-if="statusKey === item.status_key">
       <p class="is-small">{{ item.comment_comment }}</p>
     </div>
   </div>
