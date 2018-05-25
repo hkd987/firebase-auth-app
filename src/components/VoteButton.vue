@@ -38,7 +38,7 @@ export default {
         },
         like_up: 1
       }
-      console.log(payload)
+      // console.log(payload)
     },
     sendDownVote () {
       const payload = {
@@ -49,7 +49,7 @@ export default {
         },
         like_up: -1
       }
-      console.log(payload)
+      // console.log(payload)
     }
   },
   computed: {
