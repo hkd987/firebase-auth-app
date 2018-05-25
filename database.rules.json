@@ -1,21 +1,27 @@
 {
-  "rules": {
-    ".read": "auth != null",
-    "$uid": {
-        ".write": "auth.uid == $uid",
-      }
-    },
-
 
     "all_statues": {
+      "rules": {
+        ".read": "auth != null",
+        "$uid": {
+          ".write": "$uid === auth.uid"
+        }
+      },
       ".indexOn": [
         "status_time_stamp"
       ]
     },
+
     "all_comments": {
+      "rule": {
+        ".read": "auth != null",
+        "$uid": {
+          ".write": "$uid === auth.uid"
+        }
+      },
       ".indexOn": [
         "comment_time_stamp"
       ]
     }
-  }
+
 }
