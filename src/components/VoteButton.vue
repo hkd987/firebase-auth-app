@@ -29,6 +29,7 @@ export default {
     }
   },
   methods: {
+    /*
     sendUpVote () {
       const payload = {
         status_key: this.statusKey,
@@ -51,6 +52,7 @@ export default {
       }
       // console.log(payload)
     }
+    */
   },
   computed: {
     user () {
