@@ -1,7 +1,12 @@
 {
   "rules": {
     ".read": "auth != null",
-    ".write": "auth != null",
+    "users": {
+      "$uid": {
+        ".write": "auth.uid == $uid",
+      }
+    },
+
     "all_statues": {
       ".indexOn": [
         "status_time_stamp"
