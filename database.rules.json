@@ -1,11 +1,11 @@
 {
   "rules": {
     ".read": "auth != null",
-    "users": {
-      "$uid": {
+    "$uid": {
         ".write": "auth.uid == $uid",
       }
     },
+
 
     "all_statues": {
       ".indexOn": [
